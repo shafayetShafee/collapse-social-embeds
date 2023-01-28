@@ -60,7 +60,7 @@ function embed_loom()
       if el.classes:includes('loom') 
       then
         local attr = el.attributes
-        local video_id = attr['loom_id']
+        local video_id = attr['video_id']
         -- Assemble HTML to be returned
         local html = '<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/'
             .. video_id
@@ -85,11 +85,41 @@ function embed_loom()
   }
 end
 
+function embed_mastodon()
+  return {
+    Div = function(el)
+      if el.classes:includes('mastodon') 
+      then
+        local attr = el.attributes
+        local mstd_url = attr['url']
+        -- Assemble HTML to be returned
+        local html = '<div style="position: relative; padding-bottom: 56.25%; height: 0;"> <iframe src="'.. mstd_url ..'/embed" class="mastodon-embed" style="max-width: 100%; border: 0;" width="100%" height="400" allowfullscreen="allowfullscreen"></iframe><script src="https://mastodon.social/embed.js" async="async"></script></div>'
+	      local mstd = pandoc.RawInline('html', html)
+	      local icon = attr['icon'] or true
+	      local collapse_appearance = "default"
+        if attr['appearance'] then
+          collapse_appearance = attr['appearance']
+        end
+        return pandoc.Div({quarto.Callout({
+          type = "note",
+          icon = icon,
+          collapse = true,
+          caption = "Mastodon Post",
+          content =  { mstd },
+          appearance = collapse_appearance
+        })}, {class = 'mstd'})
+      end
+    end
+  }
+end
+
+
 function Pandoc(doc)
   if quarto.doc.isFormat('html') then
     ensureHtmlDeps()
     local doc = doc:walk(embed_gist())
     doc = doc:walk(embed_loom())
+    doc = doc:walk(embed_mastodon())
     return doc
   end
 end
