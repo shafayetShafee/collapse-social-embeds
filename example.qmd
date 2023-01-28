@@ -1,0 +1,23 @@
+---
+title: "Collapse-social-embeds Example"
+format: html
+filters:
+  - collapse-social-embeds
+---
+
+## Embedding Collapsible Gist
+
+This filter adds formatting to heading text.
+
+
+::: {.gist user=sellorm gist_id=20525aff669acafb975b7495b8f2066e}
+:::
+
+::: {.gist user=sellorm gist_id=20525aff669acafb975b7495b8f2066e appearance='minimal'}
+:::
+
+
+## Embedding Collapsible Loom
+
+::: {.loom loom_id=8619b03224f74282b6d56cbedbcd3fc6}
+:::
