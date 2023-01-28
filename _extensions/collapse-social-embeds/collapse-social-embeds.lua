@@ -20,8 +20,6 @@ function embed_gist()
         local user = attr.user
         local gist_id = attr.gist_id
         local collapse_appearance = "default"
-        --p(user)
-        --p(gist_id)
         if attr['appearance'] then
           collapse_appearance = attr['appearance']
         end
@@ -41,8 +39,7 @@ function embed_gist()
             .. '"></script>'
 
         local gist_content = pandoc.RawInline('html', html)
-        local caption = "Github gist by" .. user
-        --return gist_content
+        local caption = "Github gist by " .. user
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
@@ -57,10 +54,42 @@ function embed_gist()
 end
 
 
+function embed_loom()
+  return {
+    Div = function(el)
+      if el.classes:includes('loom') 
+      then
+        local attr = el.attributes
+        local video_id = attr['loom_id']
+        -- Assemble HTML to be returned
+        local html = '<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/'
+            .. video_id
+            .. '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>'
+
+	      local video = pandoc.RawInline('html', html)
+	      local icon = attr['icon'] or true
+	      local collapse_appearance = "default"
+        if attr['appearance'] then
+          collapse_appearance = attr['appearance']
+        end
+        return pandoc.Div({quarto.Callout({
+          type = "note",
+          icon = icon,
+          collapse = true,
+          caption = "Loom Video",
+          content =  { video },
+          appearance = collapse_appearance
+        })}, {class = 'loom'})
+      end
+    end
+  }
+end
+
 function Pandoc(doc)
-  --if quarto.doc.isFormat('html') then
+  if quarto.doc.isFormat('html') then
     ensureHtmlDeps()
     local doc = doc:walk(embed_gist())
+    doc = doc:walk(embed_loom())
     return doc
-  --end
+  end
 end
