@@ -21,7 +21,7 @@ filters:
 
 ### Mastodon
 
-::: {.mastodon url="https://fosstodon.org/@pandoc/109712438144865859"}
+::: {.mastodon url="https://fosstodon.org/@pandoc/109712438144865859" }
 :::
 
 

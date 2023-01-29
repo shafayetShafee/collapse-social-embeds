@@ -148,6 +148,12 @@ All of the above callout types has the following [four general attributes](https
 - `appearance`: `default`, `minimal` or `simple`
 - `icon`: `true` or `false`
 
+And we can specify them as, for example,
+
+```
+::: {.gist user=tarleb gist_id=852f6ae98764bea56aeeac979f3c17be collapse=false appearance=simple icon=false caption="Lua Demo"}
+:::
+```
 
 ## Example
 
