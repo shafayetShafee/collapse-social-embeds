@@ -9,35 +9,35 @@ filters:
 
 ### Github Gist
 
-::: {.gist user=tarleb gist_id=852f6ae98764bea56aeeac979f3c17be}
+::: {.gist user=tarleb gist_id=852f6ae98764bea56aeeac979f3c17be }
 :::
 
 
-<!-- ### Loom -->
+### Loom
 
-<!-- ::: {.loom video_id=8619b03224f74282b6d56cbedbcd3fc6} -->
-<!-- ::: -->
-
-
-<!-- ### Mastodon -->
-
-<!-- ::: {.mastodon url="https://fosstodon.org/@pandoc/109712438144865859"} -->
-<!-- ::: -->
+::: {.loom video_id=8619b03224f74282b6d56cbedbcd3fc6 }
+:::
 
 
-<!-- ### Embedding post from twitter -->
+### Mastodon
 
-<!-- ::: {.twitter user=pandoc_tips status_id=1576105972103516160} -->
-<!-- ::: -->
-
-
-<!-- ### Embedding post from vimeo -->
-
-<!-- ::: {.vimeo video_id=783455878} -->
-<!-- ::: -->
+::: {.mastodon url="https://fosstodon.org/@pandoc/109712438144865859" }
+:::
 
 
-<!-- ### Youtube -->
+### Tweets
 
-<!-- ::: {.youtube video_id=mrvhk2XUfWo} -->
-<!-- ::: -->
+::: {.twitter user=pandoc_tips status_id=1576105972103516160 }
+:::
+
+
+### Vimeo
+
+::: {.vimeo video_id=783455878 }
+:::
+
+
+### Youtube
+
+::: {.youtube video_id=mrvhk2XUfWo }
+:::

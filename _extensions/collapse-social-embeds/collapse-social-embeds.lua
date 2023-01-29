@@ -34,16 +34,12 @@ function embed_gist()
         local attr = el.attributes
         local user = attr.user
         local gist_id = attr.gist_id
-        local collapse_appearance = "default"
-        if attr['appearance'] then
-          collapse_appearance = attr['appearance']
-        end
         local file_fragment = ""
         if attr['file-fragment'] ~= nil then
           local file = attr['file-fragment']
           file_fragment = '?file=' .. file
         end
-        local icon = attr['icon'] or true
+        
         -- Assemble HTML to be returned
         local html = '<script src="https://gist.github.com/'
             .. user
@@ -52,13 +48,15 @@ function embed_gist()
             .. '.js'
             .. file_fragment
             .. '"></script>'
-
         local gist_content = pandoc.RawInline('html', html)
-        local caption = "Github gist by " .. user
+        local icon = attr['icon'] or true
+        local collapse_appearance = attr['appearance'] or "default"
+        local collapse = attr['collapse'] or true
+        local caption = attr['caption'] or "Github gist by " .. user
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
-          collapse = true,
+          collapse = collapse,
           caption = caption,
           content =  { gist_content },
           appearance = collapse_appearance
@@ -83,15 +81,14 @@ function embed_loom()
 
 	      local video = pandoc.RawInline('html', html)
 	      local icon = attr['icon'] or true
-	      local collapse_appearance = "default"
-        if attr['appearance'] then
-          collapse_appearance = attr['appearance']
-        end
+        local collapse_appearance = attr['appearance'] or "default"
+        local collapse = attr['collapse'] or true
+        local caption = attr['caption'] or "Loom Video"
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
-          collapse = true,
-          caption = "Loom Video",
+          collapse = collapse,
+          caption = caption,
           content =  { video },
           appearance = collapse_appearance
         })}, {class = 'loom'})
@@ -112,15 +109,14 @@ function embed_mastodon()
         local html = '<div style="position: relative; padding-bottom: 56.25%; height: 0;"> <iframe src="'.. mstd_url ..'/embed" class="mastodon-embed" style="max-width: 100%; border: 0;" width="100%" height="400" allowfullscreen="allowfullscreen"></iframe><script src="https://mastodon.social/embed.js" async="async"></script></div>'
 	      local mstd = pandoc.RawInline('html', html)
 	      local icon = attr['icon'] or true
-	      local collapse_appearance = "default"
-        if attr['appearance'] then
-          collapse_appearance = attr['appearance']
-        end
+        local collapse_appearance = attr['appearance'] or "default"
+        local collapse = attr['collapse'] or true
+        local caption = attr['caption'] or "Mastodon Post"
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
-          collapse = true,
-          caption = "Mastodon Post",
+          collapse = collapse,
+          caption = caption,
           content =  { mstd },
           appearance = collapse_appearance
         })}, {class = 'mstd'})
@@ -159,15 +155,13 @@ function embed_tweet()
       
          local tweet = pandoc.RawInline('html', tweet_data)
          local icon = attr['icon'] or true
-         local collapse_appearance = "default"
-         if attr['appearance'] then
-           collapse_appearance = attr['appearance']
-         end
-         local caption = "Tweet from " .. user
+         local collapse_appearance = attr['appearance'] or "default"
+         local collapse = attr['collapse'] or true
+         local caption = attr['caption'] or "Tweet from " .. user
          return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
-          collapse = true,
+          collapse = collapse,
           caption = caption,
           content =  { tweet },
           appearance = collapse_appearance
@@ -192,15 +186,14 @@ function embed_vimeo()
 
 	      local vimeo_video = pandoc.RawInline('html', html)
         local icon = attr['icon'] or true
-        local collapse_appearance = "default"
-        if attr['appearance'] then
-          collapse_appearance = attr['appearance']
-        end
+        local collapse_appearance = attr['appearance'] or "default"
+        local collapse = attr['collapse'] or true
+        local caption = attr['caption'] or "Vimeo Video"
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
-          collapse = true,
-          caption = "Vimeo Video",
+          collapse = collapse,
+          caption = caption,
           content =  { vimeo_video },
           appearance = collapse_appearance
         })}, {class = 'vimeo'})
@@ -223,15 +216,14 @@ function embed_yt()
           .. '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
 	      local yt_video = pandoc.RawInline('html', html)
 	      local icon = attr['icon'] or true
-	      local collapse_appearance = "default"
-        if attr['appearance'] then
-          collapse_appearance = attr['appearance']
-        end
+        local collapse_appearance = attr['appearance'] or "default"
+        local collapse = attr['collapse'] or true
+        local caption = attr['caption'] or "Youtube Video"
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
-          collapse = true,
-          caption = "Youtube Video",
+          collapse = collapse,
+          caption = caption,
           content =  { yt_video },
           appearance = collapse_appearance
         })}, {class = 'youtube'})
