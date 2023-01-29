@@ -7,19 +7,37 @@ filters:
   - collapse-social-embeds
 ---
 
-### Embedding Collapsible Github Gist
+### Github Gist
 
-::: {.gist user=sellorm gist_id=20525aff669acafb975b7495b8f2066e}
+::: {.gist user=tarleb gist_id=852f6ae98764bea56aeeac979f3c17be}
 :::
 
 
-### Embedding Collapsible Video from Loom
+<!-- ### Loom -->
 
-::: {.loom video_id=8619b03224f74282b6d56cbedbcd3fc6}
-:::
+<!-- ::: {.loom video_id=8619b03224f74282b6d56cbedbcd3fc6} -->
+<!-- ::: -->
 
 
-### Embedding Post from Mastodon
+<!-- ### Mastodon -->
 
-::: {.mastodon url="https://mastodon.social/@sellorm/109376707453406631"}
-:::
+<!-- ::: {.mastodon url="https://fosstodon.org/@pandoc/109712438144865859"} -->
+<!-- ::: -->
+
+
+<!-- ### Embedding post from twitter -->
+
+<!-- ::: {.twitter user=pandoc_tips status_id=1576105972103516160} -->
+<!-- ::: -->
+
+
+<!-- ### Embedding post from vimeo -->
+
+<!-- ::: {.vimeo video_id=783455878} -->
+<!-- ::: -->
+
+
+<!-- ### Youtube -->
+
+<!-- ::: {.youtube video_id=mrvhk2XUfWo} -->
+<!-- ::: -->
