@@ -143,15 +143,15 @@ To know how to get the callout attributes like `user`, `*_id`, refer to the [doc
 
 All of the above callout types has the following [four general attributes](https://quarto.org/docs/authoring/callouts.html#customizing-appearance),
 
-- `caption`: The caption to appear in callout header.
-- `collapse`: `true` or `false` 
+- `title`: The title to appear in callout header.
+- `collapse`: `true` or `false`
 - `appearance`: `default`, `minimal` or `simple`
 - `icon`: `true` or `false`
 
 And we can specify them as, for example,
 
 ```
-::: {.gist user=tarleb gist_id=852f6ae98764bea56aeeac979f3c17be collapse=false appearance=simple icon=false caption="Lua Demo"}
+::: {.gist user=tarleb gist_id=852f6ae98764bea56aeeac979f3c17be collapse=false appearance=simple icon=false title="Lua Demo"}
 :::
 ```
 

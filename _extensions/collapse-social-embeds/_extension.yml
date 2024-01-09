@@ -1,6 +1,6 @@
 title: Collapse Social Embeds
 author: Shafayet Khan Shafee
-version: 1.0.0
+version: 1.1.0
 quarto-required: ">=1.3.0"
 contributes:
   filters:
