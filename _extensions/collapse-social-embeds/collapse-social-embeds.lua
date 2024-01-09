@@ -1,5 +1,5 @@
--- the code for embedding social contents were taken 
--- from https://github.com/sellorm/quarto-social-embeds 
+-- the code for embedding social contents were taken
+-- from https://github.com/sellorm/quarto-social-embeds
 
 local str = pandoc.utils.stringify
 local p = quarto.log.output
@@ -8,14 +8,14 @@ local p = quarto.log.output
 local function ensureHtmlDeps()
   quarto.doc.add_html_dependency({
       name = "collapse-social-embeds",
-      version = "1.0.0",
+      version = "1.1.0",
       stylesheets = {"resources/css/collapse.css"}
     },
     {
       name = 'twitter',
       version = '0.0.1',
       scripts = {
-          { 
+          {
             path = "",
             attribs = {src="https://platform.twitter.com/widgets.js"},
             afterBody = true
@@ -29,7 +29,7 @@ end
 function embed_gist()
   return {
     Div = function(el)
-      if el.classes:includes('gist') 
+      if el.classes:includes('gist')
       then
         local attr = el.attributes
         local user = attr.user
@@ -39,7 +39,7 @@ function embed_gist()
           local file = attr['file-fragment']
           file_fragment = '?file=' .. file
         end
-        
+
         -- Assemble HTML to be returned
         local html = '<script src="https://gist.github.com/'
             .. user
@@ -52,12 +52,12 @@ function embed_gist()
         local icon = attr['icon'] or true
         local collapse_appearance = attr['appearance'] or "default"
         local collapse = attr['collapse'] or true
-        local caption = attr['caption'] or "Github gist by " .. user
+        local title = attr['title'] or "Github gist by " .. user
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
           collapse = collapse,
-          caption = caption,
+          title = title,
           content =  { gist_content },
           appearance = collapse_appearance
         })}, {class = 'gist'})
@@ -70,7 +70,7 @@ end
 function embed_loom()
   return {
     Div = function(el)
-      if el.classes:includes('loom') 
+      if el.classes:includes('loom')
       then
         local attr = el.attributes
         local video_id = attr['video_id']
@@ -83,12 +83,12 @@ function embed_loom()
 	      local icon = attr['icon'] or true
         local collapse_appearance = attr['appearance'] or "default"
         local collapse = attr['collapse'] or true
-        local caption = attr['caption'] or "Loom Video"
+        local title = attr['title'] or "Loom Video"
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
           collapse = collapse,
-          caption = caption,
+          title = title,
           content =  { video },
           appearance = collapse_appearance
         })}, {class = 'loom'})
@@ -101,7 +101,7 @@ end
 function embed_mastodon()
   return {
     Div = function(el)
-      if el.classes:includes('mastodon') 
+      if el.classes:includes('mastodon')
       then
         local attr = el.attributes
         local mstd_url = str(attr['url'])
@@ -111,12 +111,12 @@ function embed_mastodon()
 	      local icon = attr['icon'] or true
         local collapse_appearance = attr['appearance'] or "default"
         local collapse = attr['collapse'] or true
-        local caption = attr['caption'] or "Mastodon Post"
+        local title = attr['title'] or "Mastodon Post"
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
           collapse = collapse,
-          caption = caption,
+          title = title,
           content =  { mstd },
           appearance = collapse_appearance
         })}, {class = 'mstd'})
@@ -135,38 +135,38 @@ function embed_tweet()
          local user = attr.user
          local status_id = attr.status_id
          -- Assemble the twitter oembed API URL from the user inputs
-         local tweet_embed = 'https://publish.twitter.com/oembed?url=https://twitter.com/' 
+         local tweet_embed = 'https://publish.twitter.com/oembed?url=https://twitter.com/'
                 .. user
                 .. '/status/'
                 .. status_id
                 .. '&align=center'
          local mt, api_resp = pandoc.mediabag.fetch(tweet_embed)
-            
+
          -- generate a random number to append to the html div ID to avoid re-use
          local id = math.random(10000, 99999)
-      
+
          local tweet_data = '<div id="tweet-'
-            .. id 
-            .. '"></div><script>tweet=' 
-            .. api_resp 
-            .. ';document.getElementById("tweet-' 
-            .. id 
+            .. id
+            .. '"></div><script>tweet='
+            .. api_resp
+            .. ';document.getElementById("tweet-'
+            .. id
             .. '").innerHTML = tweet["html"];</script>'
-      
+
          local tweet = pandoc.RawInline('html', tweet_data)
          local icon = attr['icon'] or true
          local collapse_appearance = attr['appearance'] or "default"
          local collapse = attr['collapse'] or true
-         local caption = attr['caption'] or "Tweet from " .. user
+         local title = attr['title'] or "Tweet from " .. user
          return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
           collapse = collapse,
-          caption = caption,
+          title = title,
           content =  { tweet },
           appearance = collapse_appearance
           })}, {class = 'tweet'})
-      end       
+      end
     end
   }
 end
@@ -188,16 +188,16 @@ function embed_vimeo()
         local icon = attr['icon'] or true
         local collapse_appearance = attr['appearance'] or "default"
         local collapse = attr['collapse'] or true
-        local caption = attr['caption'] or "Vimeo Video"
+        local title = attr['title'] or "Vimeo Video"
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
           collapse = collapse,
-          caption = caption,
+          title = title,
           content =  { vimeo_video },
           appearance = collapse_appearance
         })}, {class = 'vimeo'})
-      end    
+      end
     end
   }
 end
@@ -218,12 +218,12 @@ function embed_yt()
 	      local icon = attr['icon'] or true
         local collapse_appearance = attr['appearance'] or "default"
         local collapse = attr['collapse'] or true
-        local caption = attr['caption'] or "Youtube Video"
+        local title = attr['title'] or "Youtube Video"
         return pandoc.Div({quarto.Callout({
           type = "note",
           icon = icon,
           collapse = collapse,
-          caption = caption,
+          title = title,
           content =  { yt_video },
           appearance = collapse_appearance
         })}, {class = 'youtube'})
